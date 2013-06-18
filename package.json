@@ -1,0 +1,9 @@
+{
+  "name": "geolocation",
+  "fullName": "fx-sdk-geolocation",
+  "id": "jid1-MXeEKO1hhU3hkQ",
+  "description": "Mozilla Add-on SDK module for the nsIDOMGeoGeolocation service",
+  "author": "Bryan Clark (http://clarkbw.net/) <clarkbw@gmail.com>",
+  "license": "MPL 2.0",
+  "version": "0.1.0"
+}
