@@ -25,18 +25,18 @@ exports['test preference is saved correctly'] = function (assert) {
 
 exports['test getCurrentPosition'] = function (assert, done) {
   Geolocation.allowed = true;
-  Geolocation.getCurrentPosition().then(function success(position) {
-    assert.ok(position, "Got the position " + position.coords.latitude + " " + position.coords.longitude);
-    assert.ok(Geolocation.accuracy, "accuracy: " + Geolocation.accuracy);
-    assert.notEqual(Geolocation.altitude, null, "altitude: " + Geolocation.altitude);
-    assert.notEqual(Geolocation.altitudeAccuracy, null, "altitudeAccuracy: " + Geolocation.altitudeAccuracy);
+  Geolocation.getCurrentPosition().then(function success(geo) {
+    assert.ok(geo, "Got the position " + geo.latitude + " " + geo.longitude);
+    assert.ok(geo.accuracy, "accuracy: " + geo.accuracy);
+    assert.notEqual(geo.altitude, null, "altitude: " + geo.altitude);
+    assert.notEqual(geo.altitudeAccuracy, null, "altitudeAccuracy: " + geo.altitudeAccuracy);
     // these will fail if you're running this test on a moving phone
-    assert.ok(isNaN(Geolocation.heading), "heading: " + Geolocation.heading);
-    assert.ok(isNaN(Geolocation.speed), "speed: " + Geolocation.speed);
-    if (Geolocation.GEO_API_V1) {
-      assert.ok(Geolocation.address, "address: " + Geolocation.address);
+    assert.ok(isNaN(geo.heading), "heading: " + geo.heading);
+    assert.ok(isNaN(geo.speed), "speed: " + geo.speed);
+    if (geo.GEO_API_V1) {
+      assert.ok(geo.address, "address: " + geo.address);
     } else {
-      assert.equal(Geolocation.address, null, "address: " + Geolocation.address);
+      assert.equal(geo.address, null, "address: " + geo.address);
     }
     done();
   }, function fail(error) {
@@ -54,11 +54,11 @@ exports['test getCurrentPosition'] = function (assert, done) {
 
 exports['test watchPosition'] = function (assert, done) {
   Geolocation.allowed = true;
-  Geolocation.watchPosition().then(function success(position) {
-    assert.ok(position, "Got the position " + position.coords.latitude + " " + position.coords.longitude);
-    assert.equal(Geolocation.isWatching(), true, "Is currently watching the position");
-    Geolocation.allowed = false;
-    assert.equal(Geolocation.isWatching(), false, "Is no longer watching the position");
+  Geolocation.watchPosition().then(function success(geo) {
+    assert.ok(geo, "Got the position " + geo.latitude + " " + geo.longitude);
+    assert.equal(geo.isWatching(), true, "Is currently watching the position");
+    geo.allowed = false;
+    assert.equal(geo.isWatching(), false, "Is no longer watching the position");
     done();
   }, function fail(error) {
     assert.fail(error);
